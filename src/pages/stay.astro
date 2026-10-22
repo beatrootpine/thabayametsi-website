@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import { SITE } from '../data/site';
+import { heroImage } from '../lib/schema';
+const crumbs = [{ name: 'Stay', href: '/stay' }];
+const icons: Record<string, string> = {
+  private: '<path d="M5 11V8a7 7 0 0 1 14 0v3"/><rect x="3" y="11" width="18" height="11"/>',
+  malaria: '<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/>',
+  foot: '<path d="M8 21c-2 0-3-2-2-5l2-6c1-3 4-3 5 0s-1 6-3 8"/><circle cx="16" cy="5" r="1.6"/><circle cx="19" cy="9" r="1.4"/>',
+  big5: '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  dark: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
+  cold: '<path d="M12 2v20M4.2 6.5l15.6 11M4.2 17.5l15.6-11"/>',
+};
+const expect = [
+  ['private', 'Private', 'The reserve is closed to day visitors; only guests of the house are on it.'],
+  ['malaria', 'Malaria-free', 'The Waterberg needs no prophylaxis.'],
+  ['foot', 'On foot', 'Walks are with the field guide; the reserve is unfenced to leopard and hyena.'],
+  ['big5', 'Not Big 5', 'Lion, elephant, rhino and buffalo are a short drive away, not here.'],
+  ['dark', 'Dark', 'Lights are low and off by ten; bring a torch.'],
+  ['cold', 'Cold in winter', 'June and July nights fall near freezing; the fireplaces are real.'],
+];
+---
+<Base
+  title="Stay — The Maravi at Thaba Ya Metsi"
+  description="The reserve’s farm hotel: eight rooms, one table, a rock pool under dark skies. Taken whole by families and groups, or a room at a time."
+  heroPage crumbs={crumbs} og="stay-hero-house-at-dusk" preload="stay-hero-house-at-dusk"
+  schema={[heroImage('stay-hero-house-at-dusk', 'The house at dusk')]}
+>
+  <Hero image="stay-hero-house-at-dusk" alt="The lawn and pool of the house at dusk, the sun going down behind the hills" title="The reserve’s farm hotel is The Maravi." eyebrow="Stay">
+    Eight rooms in the reserve’s manor house. One table. A rock pool under dark skies. Taken whole by families and groups, or a room at a time. Rooms, rates and bookings are on The Maravi’s own site.
+    <a slot="actions" class="btn light" href={SITE.maravi} rel="noopener" data-track="stay-hero">Go to The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+  </Hero>
+  <Crumbs items={crumbs} bar />
+
+  <!-- 2. Two ways -->
+  <section class="band stone">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Two ways</span><h2>The whole house, or a room</h2></div>
+      <div class="ways">
+        <article class="way">
+          <div class="frame"><Img name="long-table-on-the-lawn" alt="A long table set on a lawn in late golden light" sizes="(min-width: 800px) 50vw, 100vw" /></div>
+          <div class="body">
+            <h3>The whole house.</h3>
+            <p>Sixteen guests, every room, every meal, the fire and the reserve, for two nights or more.</p>
+            <a class="link" href={SITE.maravi} rel="noopener" data-track="stay-whole-house">Enquire at The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article class="way">
+          <div class="frame"><Img name="room-opening-to-terrace" alt="A bedroom under a thatched ceiling with a canopy bed" sizes="(min-width: 800px) 50vw, 100vw" pos="50% 60%" /></div>
+          <div class="body">
+            <h3>A room.</h3>
+            <p>On the nights the house is not taken, the rooms are open, with breakfast from the farm.</p>
+            <a class="link" href={SITE.maravi} rel="noopener" data-track="stay-room">Book at The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What to expect -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">What to expect</span><h2>Six things to know before you come</h2></div>
+      <div class="expect">
+        {expect.map(([k, h, t]) => (
+          <div class="exp">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[k]} />
+            <strong>{h}</strong>
+            <p>{t}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Getting here -->
+  <section class="band tight dark">
+    <div class="wrap foot-cta">
+      <div class="stack measure" style="max-width:44rem">
+        <span class="eyebrow">Getting here</span>
+        <h2>Two and a half hours from Johannesburg</h2>
+        <p>250 km from Johannesburg on the N1, about two and a half hours; an hour south of Polokwane; the last stretch is good gravel off the R101. Directions, a map pin and the helipad’s coordinates are on the Visit page.</p>
+      </div>
+      <a class="btn light" href="/visit">Visit & Contact <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</Base>

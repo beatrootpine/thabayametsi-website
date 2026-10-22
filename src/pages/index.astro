@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Img from '../components/Img.astro';
+import { SITE, FAQ } from '../data/site';
+import { faqPage, heroImage } from '../lib/schema';
+import { getCollection } from 'astro:content';
+import { fmt, iso } from '../lib/dates';
+
+const entries = (await getCollection('journal')).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3);
+const doors = [
+  { href: '/the-reserve', title: 'The Reserve', img: 'reserve-hero-ridge-from-the-flats', alt: 'Late light over the ridge above the flats', text: '132 hectares between Mookgopong and Mokopane, where the Waterberg meets the Springbok Flats.' },
+  { href: '/wildlife', title: 'Wildlife', img: 'klipspringer-on-rock', alt: 'A klipspringer standing on a rock among bushes', text: 'Kudu, bushbuck, klipspringer, leopard and brown hyena on the mountain, as they have always been.' },
+  { href: '/stud-and-wildlife', title: 'Stud & Wildlife', img: 'sable-bull-in-the-bush', alt: 'A sable bull standing in dry bushveld', text: 'The reserve’s breeding division: a registered Boran stud and a sable herd, each in its own camp, bred for genetics.' },
+  { href: '/conservation', title: 'Conservation', img: 'spring-over-rocks', alt: 'Spring water running over mossy rocks', text: 'Water, veld, fire and fences: the work of keeping a mountain alive.' },
+  { href: '/stay', title: 'Stay', img: 'stay-hero-house-at-dusk', alt: 'The house lawn and pool at dusk with the hills behind', text: 'The Maravi, the reserve’s farm hotel: eight rooms, one table, a rock pool under dark skies.' },
+];
+const facts = [
+  ['132', 'hectares'], ['Waterberg', 'Limpopo'], ['250 km', 'from Johannesburg'], ['1 hour', 'from Polokwane'], ['Malaria‑free', 'no prophylaxis'], ['Private', 'ownership'],
+];
+---
+<Base
+  title="Thaba Ya Metsi Private Game Reserve, Waterberg"
+  description="A 132-hectare private game reserve between Mookgopong and Mokopane in the Waterberg, Limpopo. Sable, Boran genetics, and one farm hotel, The Maravi."
+  heroPage
+  preload="home-hero-waterberg-ridge-first-light"
+  schema={[faqPage(), heroImage('home-hero-waterberg-ridge-first-light', 'The ridge at first light')]}
+>
+  <Hero image="home-hero-waterberg-ridge-first-light" alt="A flat-topped sandstone ridge glowing at first light above dark bushveld" title="Thaba Ya Metsi. Water mountain." size="full" eyebrow="Waterberg · Limpopo · South Africa" pos="60% 50%" coords>
+    A 132-hectare private game reserve in the Waterberg mountains of Limpopo, where the mountain holds the water and the water holds the life.
+    <a slot="actions" class="btn light" href="/the-reserve">The Reserve <span class="arrow" aria-hidden="true">→</span></a>
+  </Hero>
+
+  <!-- 2. The name -->
+  <section class="band">
+    <div class="wrap name-block">
+      <h2 class="big-word"><span lang="nso">Thaba ya Metsi</span><span class="lang">Sepedi · water mountain</span></h2>
+      <div class="stack">
+        <p class="lede"><span lang="nso" class="it">Thaba</span> is the mountain. <span lang="nso" class="it">Metsi</span> is the water.</p>
+        <p>The name is older than the fence, the house and the road, and it says the one thing about this place that matters: the mountain is where the water comes from, and everything below lives on it.</p>
+        <p><a class="link" href="/the-name">The name <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Five doors -->
+  <section class="band" style="padding-top:0">
+    <div class="wrap stack-lg">
+      <div class="stack">
+        <span class="eyebrow">The reserve</span>
+        <h2 class="vh">Five ways into the reserve</h2>
+      </div>
+      <div class="doors">
+        {doors.map((d) => (
+          <a class="door" href={d.href}>
+            <div class="frame">
+              <Img name={d.img} alt={d.alt} sizes="(min-width: 900px) 20vw, (min-width: 600px) 50vw, 100vw" />
+              <h3 class="door-title">{d.title} <span class="arrow" aria-hidden="true">→</span></h3>
+            </div>
+            <p>{d.text}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Facts strip -->
+  <section class="band tight" style="padding-top:0">
+    <div class="wrap">
+      <h2 class="vh">The reserve in figures</h2>
+      <dl class="facts">
+        {facts.map(([f, l]) => <div class="fact"><dt class="lbl">{l}</dt><dd class="fig" style="margin:0;order:-1">{f}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 5. The house -->
+  <section class="band stone">
+    <div class="wrap split wide-img">
+      <figure class="frame ratio-32">
+        <Img name="house-lit-at-night" alt="A house at dusk with its windows lit warm against the dark" sizes="(min-width: 900px) 58vw, 100vw" />
+      </figure>
+      <div class="stack">
+        <span class="eyebrow">The house</span>
+        <h2>The reserve holds one house.</h2>
+        <p>The Maravi is a farm hotel of eight rooms in the reserve’s face-brick manor: a table that eats from the land, a rock pool, and a house wine that belongs to the place. It is taken whole by families and groups, or a room at a time. Rooms, rates and bookings are on The Maravi’s own site.</p>
+        <p><a class="btn" href={SITE.maravi} rel="noopener" data-track="stay-home">Stay at The Maravi <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. The sable -->
+  <section class="statement">
+    <div class="hero-media"><Img name="sable-bull-in-dry-grass" alt="A sable bull with long swept-back horns standing in pale dry grass" sizes="100vw" pos="50% 30%" /></div>
+    <div class="statement-body">
+      <div class="wrap stack">
+        <span class="eyebrow" style="color:var(--grass)">The sable</span>
+        <h2>Fifty hectares for the sable.</h2>
+        <p>A breeding herd of sable antelope lives in its own camp on the reserve. It is the reason many people first hear the name Thaba Ya Metsi.</p>
+        <p><a class="btn light" href="/stud-and-wildlife#sable">The sable herd <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Journal -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="foot-cta">
+        <div class="stack"><span class="eyebrow">Journal</span><h2>From the reserve</h2></div>
+        <a class="link" href="/journal">All entries <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="cards">
+        {entries.map((e) => (
+          <a class="card" href={`/journal/${e.id}`}>
+            <div class="frame"><Img name={e.data.image} alt={e.data.imageAlt} sizes="(min-width: 1000px) 33vw, (min-width: 700px) 50vw, 100vw" /></div>
+            <div class="meta"><time datetime={iso(e.data.date)}>{fmt(e.data.date)}</time><span>{e.data.category}</span></div>
+            <h3>{e.data.title}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band stone">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack">
+        <span class="eyebrow">Questions</span>
+        <h2>Thaba Ya Metsi, plainly</h2>
+      </div>
+      <div class="faq">
+        {FAQ.map(([q, a], i) => (
+          <details open={i === 0}>
+            <summary>{q}</summary>
+            <p class="answer">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

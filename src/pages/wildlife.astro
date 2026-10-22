@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { SITE } from '../data/site';
+import { heroImage } from '../lib/schema';
+const crumbs = [{ name: 'Wildlife', href: '/wildlife' }];
+// Sepedi names marked confirm: true need a first-language speaker's check before publication.
+const species = [
+  { n: 'Greater kudu', s: 'Tholo', latin: 'Tragelaphus strepsiceros', img: 'greater-kudu-bull', alt: 'A kudu bull with long spiralling horns', t: 'The bulls come down to the flats in spring; the cows keep to the kloof edge' },
+  { n: 'Bushbuck', s: 'Serolobotlhoko', c: true, latin: 'Tragelaphus sylvaticus', img: 'bushbuck-in-shade', alt: 'A bushbuck ram among green leaves', t: 'In the deep shade of the kloof, seen at dawn and dusk' },
+  { n: 'Klipspringer', s: 'Kololo', latin: 'Oreotragus oreotragus', img: 'klipspringer-on-rock', alt: 'A klipspringer standing on a rock among low bushes', t: 'Pairs on the bare rock of the ridge, standing on the tips of their hooves' },
+  { n: 'Mountain reedbuck', s: 'Lehele', c: true, latin: 'Redunca fulvorufula', img: 'mountain-reedbuck', alt: 'A grey-brown mountain reedbuck ram standing on bare ground', t: 'Small groups on the grassy upper slopes, whistling when disturbed' },
+  { n: 'Common duiker', s: 'Phuti', latin: 'Sylvicapra grimmia', img: 'common-duiker', alt: 'A common duiker standing on a sandy track', t: 'Alone, at the edges, at any hour' },
+  { n: 'Steenbok', s: 'Phuduhudu', latin: 'Raphicerus campestris', img: 'steenbok', alt: 'A steenbok ram with short upright horns in dry grass', t: 'On the open ground below, in pairs that hold a territory' },
+  { n: 'Leopard', s: 'Nkwe', latin: 'Panthera pardus', img: 'leopard-on-a-branch', alt: 'A leopard lying along a thick branch', t: 'Present and rarely seen; tracks on the paths, a kill in a tree now and then' },
+  { n: 'Brown hyena', s: 'Phiri e sootho', c: true, latin: 'Parahyaena brunnea', img: 'brown-hyena', alt: 'A long-haired brown hyena walking across sand', t: 'The night’s scavenger; its tracks are on the road most mornings' },
+  { n: 'Bushpig', s: 'Kolobe ya naga', latin: 'Potamochoerus larvatus', img: 'bushpig', alt: 'A bushpig with a pale mane and reddish coat', t: 'After dark, in the kloof, in family groups' },
+  { n: 'African civet', s: 'Tshipa', c: true, latin: 'Civettictis civetta', img: 'african-civet', alt: 'An African civet with black-and-grey spotted fur lying on wood', t: 'Nocturnal; its middens mark the paths' },
+  { n: 'Vervet monkey and chacma baboon', s: 'Kgabo, Tshwene', latin: 'Chlorocebus pygerythrus; Papio ursinus', img: 'chacma-baboon', alt: 'A baboon sitting on a rock', t: 'Around the kloof and the house; the baboons roost on the ridge' },
+  { n: 'Rock hyrax (dassie)', s: 'Pela', latin: 'Procavia capensis', img: 'rock-hyrax', alt: 'A rock hyrax resting on a rock', t: 'On every warm rock in the reserve' },
+];
+---
+<Base
+  title="Wildlife and the Sable — Thaba Ya Metsi"
+  description="Kudu, bushbuck, klipspringer, leopard and brown hyena, free on a Waterberg mountain reserve between Mookgopong and Mokopane. Not Big 5."
+  heroPage crumbs={crumbs} og="wildlife-hero-kudu-bull-open-ground" preload="wildlife-hero-kudu-bull-open-ground"
+  schema={[heroImage('wildlife-hero-kudu-bull-open-ground', 'A kudu bull on open ground')]}
+>
+  <Hero image="wildlife-hero-kudu-bull-open-ground" alt="A kudu bull with spiralling horns standing on a rock above open country" title="The animals that were already here, and the sable." size="short" eyebrow="Wildlife" pos="50% 40%" />
+  <Crumbs items={crumbs} bar />
+
+  <!-- 2. Honest opening -->
+  <section class="band">
+    <div class="wrap">
+      <div class="measure stack" style="max-width:44rem">
+        <span class="eyebrow">A mountain reserve</span>
+        <h2>Not a Big 5 reserve</h2>
+        <p class="lede">Thaba Ya Metsi Private Game Reserve is a mountain reserve, not a Big 5 reserve. What lives free here is the wildlife of the Waterberg’s ridges and kloofs: the antelope of rock and thicket, the leopard and brown hyena that hunt them, and the birds.</p>
+        <p>The two herds the reserve breeds, the Boran and the sable, belong to its breeding division and have their own page: <a href="/stud-and-wildlife">Stud & Wildlife</a>. This page is the land’s own animals. Where they live is described on <a href="/the-reserve">the reserve page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Free-roaming species -->
+  <section class="band stone">
+    <div class="wrap stack-lg">
+      <div class="foot-cta">
+        <div class="stack"><span class="eyebrow">Free-roaming species</span><h2>On the ridge and in the kloof</h2></div>
+        <p class="small measure" style="max-width:26rem">Common name, then the Sepedi name. Names marked <span class="tbc">confirm</span> are being checked by a first-language speaker.</p>
+      </div>
+      <ul class="species" style="list-style:none;margin:0;padding:0">
+        {species.map((x) => (
+          <li class="sp" title={x.latin}>
+            <div class="frame"><Img name={x.img} alt={x.alt} sizes="(min-width: 1150px) 25vw, (min-width: 800px) 33vw, 50vw" /></div>
+            <h3>{x.n}</h3>
+            <span class="sepedi" lang="nso">{x.s}{x.c && <> <span class="tbc" lang="en">confirm</span></>}</span>
+            <p>{x.t}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Birds -->
+  <section class="band">
+    <div class="wrap split">
+      <figure class="frame ratio-32"><Img name="verreauxs-eagle" alt="A Verreaux’s eagle in flight, black with white on its back" sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">Birds</span>
+        <h2>Birds of the kloof and the cliffs</h2>
+        <p>The reserve lies within the Waterberg’s bird-rich sourveld. Verreaux’s eagle nests on the cliffs of the district, and the kloof holds the forest species: Narina trogon on occasion, crested barbet, grey-headed bushshrike, and the owls. A checklist is kept by the field guide and updated each season.</p>
+        <p><span class="link" aria-disabled="true" style="opacity:.55">Download the bird list (PDF) <span aria-hidden="true">→</span></span> <span class="tbc">list to be compiled before launch</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. How to see them -->
+  <section class="band stone">
+    <div class="wrap split wide-text">
+      <div class="stack">
+        <span class="eyebrow">How to see them</span>
+        <h2>First light, dusk, and the late afternoon</h2>
+        <div class="stack">
+          <p><strong style="color:var(--ink)">On foot, with the guide, at first light:</strong> the tracks of the night are still sharp on the road and the kudu are on the open ground before the sun reaches it.</p>
+          <p><strong style="color:var(--ink)">From the terrace, at dusk:</strong> the bushbuck come to the kloof edge and the baboons go up to the ridge.</p>
+          <p><strong style="color:var(--ink)">From the sable camp, from the vehicle:</strong> the herd comes to water in the late afternoon.</p>
+        </div>
+        <p class="small">Walks and visits to the camp are for guests of The Maravi, with the field guide.</p>
+      </div>
+      <figure class="frame ratio-45"><Img name="guide-on-a-path-at-dawn" alt="Walkers following a path through low bush in early light" sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+    </div>
+  </section>
+
+  <!-- 7. Big 5 -->
+  <section class="band tight">
+    <div class="wrap">
+      <div class="measure stack" style="max-width:44rem">
+        <span class="eyebrow">Big 5</span>
+        <h2>The Big 5 are a short drive away</h2>
+        <p>Lion, elephant, rhino and buffalo do not occur on the reserve. Big 5 game drives are available at private reserves within an hour’s drive, and The Maravi arranges them for its guests.</p>
+      </div>
+    </div>
+  </section>
+
+  <StayFoot heading="Guests of The Maravi have the run of the reserve." />
+</Base>

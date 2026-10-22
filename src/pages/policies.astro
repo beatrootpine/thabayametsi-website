@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import StayFoot from '../components/StayFoot.astro';
+const crumbs = [{ name: 'Policies & Privacy', href: '/policies' }];
+---
+<Base title="Policies and Privacy — Thaba Ya Metsi" description="Privacy, POPIA, cookies, photography and access policies for Thaba Ya Metsi Private Game Reserve." crumbs={crumbs}>
+  <PageHead title="Policies &amp; Privacy" eyebrow="Thaba Ya Metsi Private Game Reserve" crumbs={crumbs} />
+  <section class="band">
+    <div class="wrap">
+      <div class="prose" style="margin-inline:0">
+        <p class="draft-note">Draft wording for legal review before launch. <span class="tbc">confirm</span></p>
+        <h2 id="privacy">Privacy and POPIA</h2>
+        <p>Thaba Ya Metsi Private Game Reserve collects personal information only when you send it through a form on this site: your name, organisation, email, phone and message. It uses that information to reply to you and for no other purpose. It does not sell or share it. Messages go to the reserve’s office inbox and an internal record of enquiries.</p>
+        <p>You may ask to see, correct or delete the information the reserve holds about you by writing to the office. The reserve’s information officer is <span class="tbc">name or role to confirm</span>.</p>
+        <h2 id="cookies">Cookies and analytics</h2>
+        <p>This site does not use advertising cookies. It uses privacy-respecting analytics to count visits and clicks to The Maravi, without identifying you. <span class="tbc">confirm the analytics tool chosen</span></p>
+        <h2 id="bookings">Bookings</h2>
+        <p>This site takes no bookings and shows no rates. Stays at The Maravi are booked on The Maravi’s own site, under its own terms.</p>
+        <h2 id="access">Access</h2>
+        <p>The reserve is not open to the public. Partners, researchers and press visit by arrangement. No drones without written permission, no firearms, no pets.</p>
+        <h2 id="photography">Photography on this site</h2>
+        <p>The photographs on this review build are placeholders, from Unsplash and Wikimedia Commons, and will be replaced by the reserve’s own photography before launch. Species photographs from Wikimedia Commons are used under their Creative Commons licences and credited to their authors on their file pages.</p>
+      </div>
+    </div>
+  </section>
+  <StayFoot />
+</Base>

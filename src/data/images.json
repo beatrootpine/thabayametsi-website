@@ -1,0 +1,356 @@
+{
+ "african-civet": {
+  "w": 500,
+  "h": 333,
+  "sizes": [
+   480
+  ]
+ },
+ "brown-hyena": {
+  "w": 800,
+  "h": 574,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "bushbuck-in-shade": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "bushpig": {
+  "w": 800,
+  "h": 970,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "bushveld-grass": {
+  "w": 1300,
+  "h": 1950,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "cattle-herd-on-the-flats": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "chacma-baboon": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "common-duiker": {
+  "w": 800,
+  "h": 773,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "conservation-hero-controlled-burn": {
+  "w": 1920,
+  "h": 1080,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "crested-barbet": {
+  "w": 800,
+  "h": 1259,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "fire-pit-at-night": {
+  "w": 1300,
+  "h": 869,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "greater-kudu-bull": {
+  "w": 800,
+  "h": 1200,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "guide-on-a-path-at-dawn": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "home-hero-waterberg-ridge-first-light": {
+  "w": 1920,
+  "h": 1080,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "house-lit-at-night": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "klipspringer-on-rock": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "kloof-waterfall": {
+  "w": 1300,
+  "h": 1733,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "leopard-on-a-branch": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "long-table-on-the-lawn": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "manor-house-in-its-setting": {
+  "w": 1300,
+  "h": 912,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "milky-way-over-the-ridge": {
+  "w": 1920,
+  "h": 1349,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "mountain-reedbuck": {
+  "w": 800,
+  "h": 874,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "reserve-hero-ridge-from-the-flats": {
+  "w": 1920,
+  "h": 1280,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "rock-hyrax": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "rock-pool": {
+  "w": 1300,
+  "h": 861,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "room-opening-to-terrace": {
+  "w": 1300,
+  "h": 1733,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "sable-at-the-water": {
+  "w": 1300,
+  "h": 1950,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "sable-bull-in-dry-grass": {
+  "w": 1920,
+  "h": 2880,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "sable-bull-in-the-bush": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "sable-herd-in-camp": {
+  "w": 1300,
+  "h": 1300,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "sandstone-rock-and-water": {
+  "w": 1300,
+  "h": 867,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "savanna-tree-at-dawn": {
+  "w": 1300,
+  "h": 1733,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "solar-array": {
+  "w": 1300,
+  "h": 865,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "spring-over-rocks": {
+  "w": 1300,
+  "h": 975,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "stay-hero-house-at-dusk": {
+  "w": 1920,
+  "h": 1280,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "steenbok": {
+  "w": 800,
+  "h": 533,
+  "sizes": [
+   480,
+   800
+  ]
+ },
+ "stud-hero-boran-herd-at-dawn": {
+  "w": 1920,
+  "h": 840,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "verreauxs-eagle": {
+  "w": 1300,
+  "h": 737,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ },
+ "wildlife-hero-kudu-bull-open-ground": {
+  "w": 1920,
+  "h": 1280,
+  "sizes": [
+   480,
+   960,
+   1440,
+   1920
+  ]
+ },
+ "zebu-cow-head-on": {
+  "w": 1300,
+  "h": 2310,
+  "sizes": [
+   480,
+   960,
+   1300
+  ]
+ }
+}

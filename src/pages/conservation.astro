@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { heroImage } from '../lib/schema';
+const crumbs = [{ name: 'Conservation', href: '/conservation' }];
+const work = [
+  { h: 'Water', img: 'spring-over-rocks', alt: 'Spring water running over mossy rocks', t: 'The springs and the rock pool are monitored through the dry season. Boreholes are metered. Nothing is pumped from the kloof. The reserve’s water use is planned against the driest year on record, not the average.' },
+  { h: 'Veld and fire', img: 'conservation-hero-controlled-burn', alt: 'A controlled burn moving across grassland at dusk', t: 'The sourveld needs fire to stay grass; without it, bush takes over and the grazers leave. Firebreaks are cut on the boundaries each autumn and blocks are burned in rotation, cool and early, on days without wind. Alien plants (lantana, syringa, jacaranda seedlings) are pulled by hand where they appear.' },
+  { h: 'Fences and animals', img: 'sable-bull-in-the-bush', alt: 'A sable bull in dry bushveld inside the camp', t: 'The outer fence keeps cattle in and poachers out; it is not a game fence and the antelope, leopard and hyena cross it as they always have. The sable camp is the one game-fenced area. No hunting takes place on the reserve. Snares found on the boundary are removed and reported.' },
+  { h: 'The sky', img: 'milky-way-over-the-ridge', alt: 'The Milky Way over a dark line of trees', t: 'The reserve keeps its lights low and its nights dark. Outdoor lighting is warm, shielded and off by 22:00. It is a small thing that the owls, the bats and the guests all notice.' },
+];
+const commitments = [
+  ['No hunting.'],
+  ['No new game fencing beyond the sable camp.'],
+  ['No lights on the ridge.'],
+  ['Firebreaks every autumn; controlled burns on a written plan.'],
+  ['Alien plant clearing every green season.'],
+  ['Water use reported annually to the biosphere reserve.', true],
+  ['Staff employed from the Mookgopong and Mokopane districts first.', true],
+];
+---
+<Base
+  title="Conservation and Land — Thaba Ya Metsi"
+  description="Water, veld, fire and fences on a Waterberg reserve: what the reserve does each year to keep a mountain alive, and what it has committed to."
+  heroPage crumbs={crumbs} og="conservation-hero-controlled-burn" preload="conservation-hero-controlled-burn"
+  schema={[heroImage('conservation-hero-controlled-burn', 'A controlled burn on the veld')]}
+>
+  <Hero image="conservation-hero-controlled-burn" alt="A line of fire burning low across grassland at dusk, with trees in silhouette" title="Keeping a mountain alive is work." size="short" eyebrow="Conservation and land" />
+  <Crumbs items={crumbs} bar />
+
+  <!-- 2. The work -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="split wide-text" style="align-items:end">
+        <div class="stack"><span class="eyebrow">The work</span><h2>Water, veld, fences and sky</h2></div>
+        <p>Thaba Ya Metsi Private Game Reserve is 132 hectares of <a href="/the-reserve">ridge, kloof and bushveld</a>, home to <a href="/wildlife">free-roaming Waterberg wildlife</a>. This is what the reserve does, each year, to keep it that way.</p>
+      </div>
+      <div class="grid-2">
+        {work.map((w) => (
+          <article class="work">
+            <div class="frame"><Img name={w.img} alt={w.alt} sizes="(min-width: 800px) 50vw, 100vw" /></div>
+            <h3>{w.h}</h3>
+            <p>{w.t}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Energy and water at the house -->
+  <section class="band stone">
+    <div class="wrap split">
+      <figure class="frame ratio-32"><Img name="solar-array" alt="Rows of solar panels on grass under a cloudy sky" sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">Energy and water at the house</span>
+        <h2>Sun first, district first</h2>
+        <p>The Maravi runs on solar with battery storage, with the grid and a generator as backup. <span class="tbc">confirm at installation</span> Hot water is solar. Grey water from the house irrigates the vegetable garden. The kitchen buys from the district first.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The biosphere -->
+  <section class="band">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack"><span class="eyebrow">The biosphere</span><h2>Inside the Waterberg Biosphere Reserve</h2></div>
+      <div class="stack">
+        <p>The reserve lies within the Waterberg Biosphere Reserve, designated by UNESCO in 2001 as South Africa’s first savanna biosphere. The reserve is a member of <span class="tbc">Waterberg Biosphere Reserve / Waterberg Nature Conservancy: confirm which</span> and follows its guidance on fire, alien plants and wildlife.</p>
+        <p><a class="link" href="https://waterbergbiosphere.com/" rel="noopener">The Waterberg Biosphere Reserve <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Commitments -->
+  <section class="band stone">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack">
+        <span class="eyebrow">Commitments</span>
+        <h2>What the reserve has committed to</h2>
+        <p class="small">Each line is published only once it is true.</p>
+      </div>
+      <ul class="rule-list">
+        {commitments.map(([t, c]) => <li><span>{t}{c && <> <span class="tbc">confirm</span></>}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. Foot -->
+  <section class="band tight">
+    <div class="wrap foot-cta">
+      <div class="stack measure" style="max-width:44rem">
+        <span class="eyebrow">Work with the reserve</span>
+        <h2>Researchers, conservation bodies and neighbours</h2>
+        <p>The reserve can host field work by arrangement and works with neighbouring reserves on fire, fence and security.</p>
+      </div>
+      <a class="btn fill" href="/partners">Partners & Enquiries <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <StayFoot />
+</Base>

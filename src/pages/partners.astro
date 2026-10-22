@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import StayFoot from '../components/StayFoot.astro';
+const crumbs = [{ name: 'Partners & Enquiries', href: '/partners' }];
+const who = [
+  ['Breeders and reproductive specialists', 'Registered Boran breeders, embryo transfer practices, semen collection centres, genomics laboratories.'],
+  ['Research', 'Universities and institutes working on savanna ecology, sable, Boran genetics or Waterberg hydrology; the reserve can host field work by arrangement.'],
+  ['Conservation bodies', 'The Waterberg Biosphere Reserve, provincial conservation authorities, neighbouring reserves on fire, fence and security cooperation.'],
+  ['Press', 'Journalists and photographers by prior arrangement; the reserve does not host influencer stays.'],
+];
+---
+<Base title="Partners & Enquiries — Thaba Ya Metsi" description="Who Thaba Ya Metsi works with on its land, its animals and its genetics programme, and how to write to the reserve’s office." crumbs={crumbs}>
+  <PageHead title="If your work touches ours, write to us." eyebrow="Partners & Enquiries" crumbs={crumbs}>
+    Thaba Ya Metsi Private Game Reserve works with a small number of people and institutions on its land, its animals and its genetics programme. It does not take advertising, it does not host events for third parties, and it does not sell access to the reserve.
+  </PageHead>
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Who we work with</span><h2>Four kinds of partner</h2></div>
+      <div class="who">
+        {who.map(([h, t]) => <div><h3>{h}</h3><p>{t}</p></div>)}
+      </div>
+      <p class="small">More on the <a href="/stud-and-wildlife">Boran stud and the sable herd</a> and on <a href="/conservation">the reserve’s conservation work</a>.</p>
+    </div>
+  </section>
+  <section class="band stone" id="enquiry">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack">
+        <span class="eyebrow">Enquiry form</span>
+        <h2>Write to the reserve’s office</h2>
+        <p>Messages go to the reserve’s office inbox, not to The Maravi’s reservations. For stays and bookings, go to <a href="https://www.themaravi.com/" rel="noopener">The Maravi</a>.</p>
+      </div>
+      <EnquiryForm id="partners-form" subjects={['Boran genetics', 'Research', 'Conservation', 'Press', 'Other']} />
+    </div>
+  </section>
+  <StayFoot />
+</Base>

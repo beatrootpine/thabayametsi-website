@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Img from '../components/Img.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../data/site';
+import { fmt, iso } from '../lib/dates';
+const crumbs = [{ name: 'Journal', href: '/journal' }];
+const entries = (await getCollection('journal')).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base title="Journal — Thaba Ya Metsi" description="Notes from the reserve by season: rain, veld, sightings, the sable and the Boran herd." crumbs={crumbs} og="savanna-tree-at-dawn">
+  <PageHead title="From the reserve" eyebrow="Journal" crumbs={crumbs}>
+    Dated notes by the field guide and the reserve: rain in millimetres, what was seen where, the state of the veld and the water.
+  </PageHead>
+  <section class="band" style="padding-top:clamp(2.5rem,5vw,4rem)">
+    <div class="wrap stack-lg">
+      <div class="filters" role="group" aria-label="Filter entries by category" id="filters" hidden>
+        <button type="button" aria-pressed="true" data-cat="">All</button>
+        {CATEGORIES.map((c) => <button type="button" aria-pressed="false" data-cat={c}>{c}</button>)}
+      </div>
+      <div class="cards" id="entries">
+        {entries.map((e) => (
+          <a class="card" href={`/journal/${e.id}`} data-cat={e.data.category}>
+            <div class="frame"><Img name={e.data.image} alt={e.data.imageAlt} sizes="(min-width: 1000px) 33vw, (min-width: 700px) 50vw, 100vw" /></div>
+            <div class="meta"><time datetime={iso(e.data.date)}>{fmt(e.data.date)}</time><span>{e.data.category}</span></div>
+            <h3>{e.data.title}</h3>
+            <p>{e.data.summary}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <StayFoot />
+  <script is:inline>
+    (function () {
+      var f = document.getElementById('filters'); if (!f) return; f.hidden = false;
+      var cards = document.querySelectorAll('#entries .card');
+      f.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        f.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cards.forEach(function (c) { c.hidden = !!b.dataset.cat && c.dataset.cat !== b.dataset.cat; });
+      });
+    })();
+  </script>
+</Base>

@@ -1,0 +1,151 @@
+---
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import '../styles/global.css';
+import { SITE, NAV, FOOTER_LINKS } from '../data/site';
+import { siteGraph, breadcrumbs as bc } from '../lib/schema';
+import data from '../data/images.json';
+
+interface Crumb { name: string; href: string }
+interface Props {
+  title: string;
+  description: string;
+  og?: string;            // image name used for the OpenGraph crop
+  heroPage?: boolean;     // transparent header over a photographic hero
+  crumbs?: Crumb[];       // breadcrumb trail (not on Home)
+  schema?: any[];         // extra JSON-LD nodes
+  preload?: string;       // hero image to preload
+  noindex?: boolean;
+}
+const { title, description, og = 'home-hero-waterberg-ridge-first-light', heroPage = false, crumbs, schema = [], preload, noindex = false } = Astro.props;
+const PREVIEW = process.env.PREVIEW === '1';
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+const canonical = `${SITE.url}${path === '/' ? '/' : path}`;
+const graph = { '@context': 'https://schema.org', '@graph': [...siteGraph(), ...(crumbs ? [bc(crumbs)] : []), ...schema] };
+const isCurrent = (href: string) => path === href || path.startsWith(href + '/');
+const pre = preload ? (data as any)[preload] : null;
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="claude:viewport-fit-sides" content="cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${SITE.url}/og/${og}.jpg`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#1c2928" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  {pre && <link rel="preload" as="image" imagesrcset={pre.sizes.map((w: number) => `/img/${preload}-${w}.webp ${w}w`).join(', ')} imagesizes="100vw" fetchpriority="high" />}
+  <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class={`site-header${heroPage ? '' : ' solid'}`} id="site-header" data-hero={heroPage ? '1' : '0'}>
+    <div class="wrap bar">
+      <a class="wordmark" href="/" aria-label={`${SITE.name}, home`}>
+        <span class="wm-name">Thaba Ya Metsi</span>
+        <span class="wm-sub">Private Game Reserve</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          {NAV.map((n) => <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a class="btn" href={SITE.maravi} rel="noopener" data-track="stay-header">Stay at The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" id="menu-btn">
+        <span class="menu-label">Menu</span><span class="bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobile-menu" aria-label="Menu">
+    <nav aria-label="Mobile">
+      <ul>
+        {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <p class="meta">{FOOTER_LINKS.map((l, i) => <><a href={l.href}>{l.label}</a>{i < FOOTER_LINKS.length - 1 ? ' · ' : ''}</>)}</p>
+    </nav>
+    <a class="btn" href={SITE.maravi} rel="noopener" data-track="stay-menu">Stay at The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <h2>Thaba Ya Metsi<br />Private Game Reserve</h2>
+          <p style="margin-top:1.2rem">Waterberg, Limpopo, South Africa</p>
+          <p style="margin-top:.3rem">GPS {SITE.gps}</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <span class="footer-label">Explore</span>
+            <ul>
+              {NAV.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+              <li><a href="/stay">Stay</a></li>
+            </ul>
+          </div>
+          <div>
+            <span class="footer-label">The reserve</span>
+            <ul>
+              {FOOTER_LINKS.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </div>
+        </div>
+        <div class="footer-sister">
+          <span class="footer-label">On the land</span>
+          <a href={SITE.maravi} rel="noopener" data-track="stay-footer">The Maravi, the reserve’s farm hotel <span class="arrow" aria-hidden="true">→</span></a>
+          <a href={SITE.talangi} rel="noopener" data-track="talangi-footer">Talangi Private Cellar <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© {year} {SITE.name}</span>
+        {SITE.instagram ? <a href={SITE.instagram} rel="noopener">Instagram</a> : <span>Instagram <span class="tbc">handle to confirm</span></span>}
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">Thaba Ya Metsi</div>
+    </div>
+  </footer>
+  {PREVIEW && <div class="preview-ribbon">Review build · placeholder photography</div>}
+
+  <script is:inline>
+    (function () {
+      var h = document.getElementById('site-header');
+      var b = document.getElementById('menu-btn');
+      if (h && h.dataset.hero === '1') {
+        var on = function () { h.classList.toggle('scrolled', window.scrollY > 60); };
+        on(); window.addEventListener('scroll', on, { passive: true });
+      }
+      if (b) b.addEventListener('click', function () {
+        var open = document.documentElement.classList.toggle('menu-open');
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+        b.querySelector('.menu-label').textContent = open ? 'Close' : 'Menu';
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && document.documentElement.classList.contains('menu-open')) b.click();
+      });
+    })();
+  </script>
+</body>
+</html>

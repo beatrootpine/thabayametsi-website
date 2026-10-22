@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Img from '../../components/Img.astro';
+import StayFoot from '../../components/StayFoot.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE, CATEGORY_PAGE } from '../../data/site';
+import { fmt, iso } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('journal');
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const crumbs = [{ name: 'Journal', href: '/journal' }, { name: d.title, href: `/journal/${entry.id}` }];
+const cat = CATEGORY_PAGE[d.category];
+const article = {
+  '@type': 'Article', headline: d.title, datePublished: iso(d.date), dateModified: iso(d.updated ?? d.date),
+  image: `${SITE.url}/og/${d.image}.jpg`, articleSection: d.category, inLanguage: 'en-ZA',
+  author: { '@id': `${SITE.url}/#reserve` }, publisher: { '@id': `${SITE.url}/#reserve` },
+  mainEntityOfPage: `${SITE.url}/journal/${entry.id}`,
+};
+---
+<Base title={`${d.title} — Thaba Ya Metsi`} description={d.summary} crumbs={crumbs} og={d.image} schema={[article]}>
+  <article>
+    <header class="page-head" style="border:0;padding-bottom:0">
+      <div class="wrap">
+        <div class="prose entry-head">
+          <Crumbs items={crumbs} />
+          <div class="entry-meta" style="margin-top:2rem"><time datetime={iso(d.date)}>{fmt(d.date)}</time><span>{d.category}</span><span>By {d.author}</span></div>
+          <h1 style="font-size:clamp(2.4rem,5vw,4rem)">{d.title}</h1>
+          <p class="lede">{d.summary}</p>
+          {d.draft && <p class="draft-note">Launch draft. The bracketed figures are for the field guide to fill in from the reserve’s records before publication.</p>}
+        </div>
+      </div>
+    </header>
+    <div class="wrap" style="margin-top:clamp(2rem,5vw,3.5rem)">
+      <figure style="max-width:64rem;margin-inline:auto">
+        <div class="frame ratio-32"><Img name={d.image} alt={d.imageAlt} sizes="(min-width: 1100px) 1024px, 100vw" eager /></div>
+        {d.caption && <figcaption>{d.caption}</figcaption>}
+      </figure>
+    </div>
+    <div class="wrap band" style="padding-top:clamp(2.5rem,5vw,4rem)">
+      <div class="prose">
+        <Content />
+        <p style="margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line)" class="small">More about <a href={cat.href}>{cat.label}</a>. <a href="/journal">All journal entries</a>.</p>
+      </div>
+    </div>
+  </article>
+  <StayFoot />
+</Base>

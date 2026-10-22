@@ -1,0 +1,13 @@
+---
+import Crumbs from './Crumbs.astro';
+interface Props { title: string; eyebrow?: string; crumbs: { name: string; href: string }[] }
+const { title, eyebrow, crumbs } = Astro.props;
+---
+<section class="page-head">
+  <div class="wrap stack">
+    <Crumbs items={crumbs} />
+    {eyebrow && <span class="eyebrow" style="margin-top:2.6rem">{eyebrow}</span>}
+    <h1 set:html={title} />
+    {Astro.slots.has('default') && <div class="lede measure" style="margin-top:1.8rem"><slot /></div>}
+  </div>
+</section>

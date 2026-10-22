@@ -1,0 +1,50 @@
+---
+interface Props { id: string; subjects?: string[]; to?: string }
+const { id, subjects, to = 'the reserve’s office' } = Astro.props;
+const PREVIEW = process.env.PREVIEW === '1';
+---
+<form class="form" id={id} action="/api/enquiry" method="post" data-form novalidate={false}>
+  <input type="hidden" name="form" value={id} />
+  <div class="hp" aria-hidden="true"><label for={`${id}-website`}>Leave this empty</label><input id={`${id}-website`} name="website" tabindex="-1" autocomplete="off" /></div>
+  <input type="hidden" name="t" value="" data-started />
+  <div class="row">
+    <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" required /></div>
+    <div class="field"><label for={`${id}-org`}>Organisation</label><input id={`${id}-org`} name="organisation" autocomplete="organization" /></div>
+  </div>
+  <div class="row">
+    <div class="field"><label for={`${id}-email`}>Email</label><input id={`${id}-email`} name="email" type="email" autocomplete="email" required /></div>
+    <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" /></div>
+  </div>
+  {subjects && (
+    <div class="field"><label for={`${id}-subject`}>Subject</label>
+      <select id={`${id}-subject`} name="subject" required>
+        {subjects.map((s) => <option>{s}</option>)}
+      </select>
+    </div>
+  )}
+  <div class="field"><label for={`${id}-message`}>Message</label><textarea id={`${id}-message`} name="message" required></textarea></div>
+  <p class="consent">By sending this form you agree that Thaba Ya Metsi Private Game Reserve may use these details to reply to your enquiry, in line with the Protection of Personal Information Act (POPIA). They go to {to} only and are not shared. See <a href="/policies#privacy">Policies & Privacy</a>.</p>
+  <button class="btn fill" type="submit">Send <span class="arrow" aria-hidden="true">→</span></button>
+  <p class="form-status" role="status" aria-live="polite" hidden></p>
+</form>
+<script is:inline define:vars={{ id, PREVIEW }}>
+  (function () {
+    var f = document.getElementById(id); if (!f) return;
+    var started = f.querySelector('[data-started]'); started.value = String(Date.now());
+    var status = f.querySelector('.form-status');
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!f.reportValidity()) return;
+      var btn = f.querySelector('button[type=submit]');
+      var done = function (ok) {
+        status.hidden = false;
+        status.textContent = ok ? 'Thank you. We reply within three working days.' : 'The message did not send. Please try again, or use the contact details on the Visit page.';
+        if (ok) { Array.prototype.forEach.call(f.querySelectorAll('.field, .row, .consent, button'), function (el) { el.hidden = true; }); }
+        btn.disabled = false;
+      };
+      btn.disabled = true;
+      if (PREVIEW) { done(true); return; }
+      fetch(f.action, { method: 'POST', body: new FormData(f) }).then(function (r) { done(r.ok); }).catch(function () { done(false); });
+    });
+  })();
+</script>

@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { SITE } from '../data/site';
+import { heroImage } from '../lib/schema';
+const crumbs = [{ name: 'Stud & Wildlife', href: '/stud-and-wildlife' }];
+const platform = [
+  ['Donor females', 'A nucleus herd of elite, registered Boran cows selected on fertility, conformation and pedigree.'],
+  ['IVF and MOET', 'In-vitro fertilisation and multiple ovulation embryo transfer to multiply the best females many times over.'],
+  ['Genomic selection', 'DNA-based evaluation to choose parents on what they carry, not only on what they look like.'],
+  ['Embryos and semen', 'Frozen genetics for breeders in South Africa and, subject to protocol, for export.'],
+  ['Data and education', 'Records kept to breed-society standard; field days and mentoring for emerging breeders.'],
+];
+const stages = [
+  ['Foundation', 'Assemble the donor herd from proven bloodlines; register with the Boran Cattle Breeders’ Society of South Africa.', true],
+  ['Multiplication', 'IVF and embryo transfer into recipient cows, on and off the reserve, to grow the number of elite calves per donor each year.'],
+  ['Selection', 'Genomic testing of every calf; only the top fraction returns to the nucleus.'],
+  ['Genetics sales', 'Embryos, semen and selected live animals offered to registered breeders, with full records.'],
+  ['Education', 'Field days on the reserve for emerging and established breeders; mentoring; a published set of the programme’s protocols.'],
+];
+---
+<Base
+  title="Stud & Wildlife — Thaba Ya Metsi"
+  description="The reserve’s breeding division: a registered Boran stud with IVF, embryo transfer and genomic selection, and a sable antelope breeding herd. For breeders."
+  heroPage crumbs={crumbs} og="stud-hero-boran-herd-at-dawn" preload="stud-hero-boran-herd-at-dawn"
+  schema={[heroImage('stud-hero-boran-herd-at-dawn', 'The Boran herd at dawn')]}
+>
+  <Hero image="stud-hero-boran-herd-at-dawn" alt="A herd of cattle walking down a dusty farm road in early light" title="Thaba Ya Metsi Stud &amp; Wildlife." size="short" eyebrow="The reserve’s breeding division" pos="50% 60%" />
+  <Crumbs items={crumbs} bar />
+
+  <!-- Division mark + opening -->
+  <section class="band">
+    <div class="wrap split wide-text">
+      <div class="stud-mark">
+        <img src="/img/stud-and-wildlife-logo.svg" width="400" height="300" alt="Thaba Ya Metsi Stud & Wildlife, Waterberg: the sable and the Boran facing each other under the reserve’s name" />
+        <span class="tbc small">stand-in mark · final logo to be supplied</span>
+      </div>
+      <div class="stack">
+        <span class="eyebrow">Two herds, one mountain</span>
+        <h2>Two herds, one mountain.</h2>
+        <p class="lede">The reserve breeds two animals with the same seriousness: a registered Boran stud and a sable antelope herd, each in its own camp, each selected on what it carries and what it can raise on this veld.</p>
+        <p>Thaba Ya Metsi Stud & Wildlife is the breeding division of Thaba Ya Metsi Private Game Reserve. It works with breeders, geneticists, game ranchers and buyers. It makes no offer to the public.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2a. The sable herd -->
+  <section class="band stone" id="sable">
+    <div class="wrap stack-lg">
+      <div class="split wide-text" style="align-items:start">
+        <div class="stack">
+          <span class="eyebrow">The sable herd</span>
+          <h2>Fifty hectares, one herd.</h2>
+          <p>Sable antelope (<i>Hippotragus niger</i>) are the Waterberg’s most striking large antelope and among its rarest outside managed herds. The reserve keeps a breeding herd in a fifty-hectare game-fenced camp on the lower slopes, with its own water and grazing, managed for the health and growth of the herd rather than for viewing. Guests of The Maravi visit the camp with the field guide; the animals are not habituated to vehicles and are not approached on foot.</p>
+          <div class="strip">
+            <div><span class="fig">50 ha</span><span class="lbl">camp</span></div>
+            <div><span class="fig">Breeding herd</span><span class="lbl">since <span class="tbc">[year]</span></span></div>
+            <div><span class="fig">Managed</span><span class="lbl">for herd health, not display</span></div>
+          </div>
+        </div>
+        <figure class="frame ratio-45"><Img name="sable-herd-in-camp" alt="Sable antelope with long curved horns standing together in dry bushveld" sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+      </div>
+      <div class="triptych">
+        <figure><div class="frame"><Img name="sable-at-the-water" alt="Sable antelope at the water" sizes="(min-width: 600px) 33vw, 100vw" /></div><figcaption>The herd comes to water in the late afternoon.</figcaption></figure>
+        <figure><div class="frame"><Img name="sable-bull-in-the-bush" alt="A sable bull in dry bushveld" sizes="(min-width: 600px) 33vw, 50vw" /></div><figcaption>A bull in the camp.</figcaption></figure>
+        <figure><div class="frame"><Img name="sable-bull-in-dry-grass" alt="A sable bull in pale grass, head turned" sizes="(min-width: 600px) 33vw, 50vw" pos="50% 25%" /></div><figcaption>The camp fence line with the ridge behind <span class="tbc">to shoot</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b. The Boran programme -->
+  <section class="band">
+    <div class="wrap split wide-img" style="align-items:start">
+      <figure class="frame ratio-45"><Img name="cattle-herd-on-the-flats" alt="A herd of humped zebu cattle walking towards the camera on a dusty track" sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">The Boran programme</span>
+        <h2>Boran genetics</h2>
+        <p>Thaba Ya Metsi is home to a Boran genetics programme: a small, closed platform built around elite Boran donor females and the science of getting the most from them. It is not a commercial cattle farm and it does not sell beef. Its product is genetics: embryos, semen, selected live animals, and the data and know-how that go with them.</p>
+        <p>The Boran is an East African Zebu breed developed over centuries by the Borana pastoralists and refined in Kenya through the twentieth century. It is fertile, long-lived, heat- and tick-tolerant, and a good mother on poor grazing, which is why it has become one of southern Africa’s most sought-after beef breeds. Good Boran genetics are scarce; that scarcity is the programme’s reason to exist.</p>
+        <p>The programme is privately owned and privately funded by its founder and a small circle of contributors. It is not a public offering.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. The platform -->
+  <section class="band dark">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">The platform</span><h2>Five parts of one programme</h2></div>
+      <div class="features">
+        {platform.map(([h, t]) => <div class="feature"><h3>{h}</h3><p>{t}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Why Boran, why here -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Why Boran, why here</span><h2>A breed for hard conditions, on ground that tests it</h2></div>
+      <div class="columns">
+        <div class="stack">
+          <h3>Why Boran</h3>
+          <p>Because the breed does well where conditions are hard, and southern Africa’s conditions are getting harder. Fertility under heat, resistance to ticks, and calves that get up and suck are traits that matter more every year, and the Boran carries them in its bones.</p>
+        </div>
+        <div class="stack">
+          <h3>Why here</h3>
+          <p>The Waterberg’s sourveld tests an animal. A cow that raises a calf on this grazing, through this winter, has proved something that a cow on irrigated pasture has not. The reserve’s altitude, its water and its distance from other herds make it a clean place to keep a closed nucleus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. The programme -->
+  <section class="band stone">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack">
+        <span class="eyebrow">The programme</span>
+        <h2>Five stages</h2>
+        <p class="small">Stages, not dates.</p>
+      </div>
+      <ol class="steps">
+        {stages.map(([h, t, c]) => <li><div><h3>{h}</h3><p>{t}{c && <> <span class="tbc">status to confirm</span></>}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. For breeders and partners -->
+  <section class="band">
+    <div class="wrap foot-cta">
+      <div class="stack measure" style="max-width:44rem">
+        <span class="eyebrow">For breeders and partners</span>
+        <h2>If your work touches ours</h2>
+        <p>The programme works with a small number of breeders, veterinarians, reproductive specialists and research institutions. If you keep registered Boran, run an embryo transfer practice, or work in livestock genomics, we would like to hear from you.</p>
+      </div>
+      <a class="btn fill" href="/partners">Partners & Enquiries <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- 7. Guests -->
+  <section class="band tight stone">
+    <div class="wrap foot-cta">
+      <p class="lede measure" style="max-width:40rem">Guests of The Maravi can walk through the herd with the person who runs it. It is one of the reserve’s experiences.</p>
+      <a class="link" href={SITE.maravi} rel="noopener" data-track="maravi-stud">The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <StayFoot />
+</Base>

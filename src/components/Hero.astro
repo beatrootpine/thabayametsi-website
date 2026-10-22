@@ -1,0 +1,20 @@
+---
+import Img from './Img.astro';
+import { SITE } from '../data/site';
+interface Props { image: string; alt: string; title: string; eyebrow?: string; size?: 'full' | 'short' | 'default'; pos?: string; coords?: boolean }
+const { image, alt, title, eyebrow, size = 'default', pos, coords = false } = Astro.props;
+---
+<section class={`hero ${size === 'default' ? '' : size}`}>
+  <div class="hero-media">
+    <Img name={image} alt={alt} eager pos={pos} sizes="100vw" />
+  </div>
+  <div class="hero-body">
+    <div class="wrap">
+      {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      <h1 set:html={title} />
+      {Astro.slots.has('default') && <div class="hero-text"><slot /></div>}
+      {Astro.slots.has('actions') && <div class="hero-actions"><slot name="actions" /></div>}
+    </div>
+  </div>
+  {coords && <span class="coords" aria-hidden="true">{SITE.gps}</span>}
+</section>

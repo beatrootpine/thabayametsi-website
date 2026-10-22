@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import Map from '../components/Map.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { SITE } from '../data/site';
+import { heroImage } from '../lib/schema';
+const crumbs = [{ name: 'The Reserve', href: '/the-reserve' }];
+const seasons = [
+  ['Green season', 'November to March', 'Storms in the afternoon, grass to the knee, the veld at its fullest; heat in the middle of the day'],
+  ['Autumn', 'April to May', 'Clear, still, the grass turning; the best light of the year'],
+  ['Dry season', 'June to August', 'Cold nights near freezing, warm days, the bush open and the game easiest to see; the rock pool at its lowest'],
+  ['Spring', 'September to October', 'The first flowers on the ridge, the kudu bulls in condition, the air before the rains'],
+];
+const place = { '@type': 'Place', name: SITE.name, geo: { '@type': 'GeoCoordinates', latitude: SITE.lat, longitude: SITE.lng }, containedInPlace: { '@type': 'Place', name: 'Waterberg Biosphere Reserve' }, address: { '@type': 'PostalAddress', streetAddress: SITE.address.street, addressLocality: SITE.address.locality, addressRegion: SITE.address.region, postalCode: SITE.address.postal, addressCountry: 'ZA' } };
+---
+<Base
+  title="The Reserve — Thaba Ya Metsi, Waterberg"
+  description="Where the Waterberg meets the Springbok Flats: 132 hectares of ridge, kloof and bushveld, 250 km from Johannesburg. Malaria-free, under private ownership."
+  heroPage crumbs={crumbs} og="reserve-hero-ridge-from-the-flats" preload="reserve-hero-ridge-from-the-flats"
+  schema={[place, heroImage('reserve-hero-ridge-from-the-flats', 'The ridge line from the flats, late afternoon')]}
+>
+  <Hero image="reserve-hero-ridge-from-the-flats" alt="The ridge line seen from the flats in golden late-afternoon haze, a lone tree in the foreground" title="Where the Waterberg meets the Springbok Flats." size="short" eyebrow="The Reserve" coords />
+  <Crumbs items={crumbs} bar />
+
+  <!-- 2. Where it is -->
+  <section class="band">
+    <div class="wrap split wide-img">
+      <Map />
+      <div class="stack">
+        <span class="eyebrow">Where it is</span>
+        <h2>Between Mookgopong and Mokopane</h2>
+        <p>Thaba Ya Metsi Private Game Reserve lies on the southern edge of the Waterberg, between the towns of Mookgopong and Mokopane in Limpopo, South Africa. It is 250 kilometres north of Johannesburg on the N1, 200 kilometres from Pretoria, about two hours from O.R. Tambo International Airport, and an hour south of Polokwane. The Waterberg is a UNESCO biosphere reserve and a malaria-free region.</p>
+        <p class="small" style="color:var(--ink);font-weight:600;letter-spacing:.06em">{SITE.gps}</p>
+        <p><a class="link" href="/visit">Visit & Contact <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. The land -->
+  <section class="band stone">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">The land</span><h2>Ridge, kloof and bushveld</h2></div>
+      <div class="triptych">
+        <figure><div class="frame"><Img name="sandstone-rock-and-water" alt="Layered sandstone over a dark pool, water falling in a thin line" sizes="(min-width: 600px) 33vw, 100vw" /></div><figcaption>Rock</figcaption></figure>
+        <figure><div class="frame"><Img name="kloof-waterfall" alt="A wooded gorge with water running between steep rock walls" sizes="(min-width: 600px) 33vw, 50vw" /></div><figcaption>Water</figcaption></figure>
+        <figure><div class="frame"><Img name="bushveld-grass" alt="Tall dry grass and bushes against a pale sky" sizes="(min-width: 600px) 33vw, 50vw" /></div><figcaption>Bushveld</figcaption></figure>
+      </div>
+      <div class="columns">
+        <div class="stack">
+          <p>The reserve is 132 hectares of mountain and valley: sandstone ridges, a wooded kloof, and the sourish bushveld that covers the Waterberg’s lower slopes. On the high ground the rock is bare and warm and the klipspringer stand on it; in the kloof the soil is deep, the trees are tall, and the bushbuck keep to the shade. Below, the ground opens towards the Springbok Flats and the grass comes up after the first rains.</p>
+          <blockquote class="pull">“The mountain is where the water comes from, and everything below lives on it.”</blockquote>
+        </div>
+        <div class="stack">
+          <p>The land has been under private ownership for a long time, and it has been fenced, but not for the animals that were already here. Kudu, bushbuck, klipspringer, mountain reedbuck, duiker and steenbok move as they always have. Leopard and brown hyena pass through and leave their sign. Bushpig and civet come out after dark. The only fence that keeps anything in is the fifty hectares around <a href="/stud-and-wildlife#sable">the sable breeding camp</a>.</p>
+          <p>The reserve’s animals are on the <a href="/wildlife">wildlife page</a>; how the land is looked after is on the <a href="/conservation">conservation page</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The water -->
+  <section class="band">
+    <div class="wrap split flip">
+      <figure class="frame ratio-45"><Img name="rock-pool" alt="Still water lying in a shallow basin of smooth brown rock" sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">The water</span>
+        <h2>The name is the hydrology</h2>
+        <p>Rain that falls on the ridge finds its way down through the sandstone and comes out below as springs, and where the springs meet the rock they make pools. The largest is the rock pool near the house, which holds water through the dry winter. The reserve’s boreholes draw on the same stone. Water is the first thing the reserve manages and the last thing it will give up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. The house on the land -->
+  <section class="band stone">
+    <div class="wrap split wide-img">
+      <figure class="frame ratio-32"><Img name="manor-house-in-its-setting" alt="A red-brick manor with a slate roof and deep verandas in its garden" sizes="(min-width: 900px) 58vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">The house on the land</span>
+        <h2>One house, near the foot of the kloof</h2>
+        <p>Near the foot of the kloof stands a 1,200 square metre face-brick manor with a slate roof, built with boekenhout, embuia and yellowwood from the region. It is the reserve’s one house, and it is run as The Maravi, a farm hotel of eight rooms. The reserve is not open to day visitors; guests of The Maravi have the run of it.</p>
+        <p><a class="btn" href={SITE.maravi} rel="noopener" data-track="stay-reserve">Stay at The Maravi <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Seasons -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Seasons</span><h2>The reserve through the year</h2></div>
+      <div class="table-wrap">
+        <table class="plain">
+          <thead><tr><th scope="col">Season</th><th scope="col">Months</th><th scope="col">On the reserve</th></tr></thead>
+          <tbody>
+            {seasons.map(([s, m, t]) => <tr><th scope="row">{s}</th><td class="when">{m}</td><td>{t}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="small">A one-page fact sheet (PDF) with these facts, the map and the contacts will be published here. <span class="tbc">to be produced before launch</span></p>
+    </div>
+  </section>
+
+  <StayFoot second={{ href: '/visit', label: 'Visit & Contact' }} />
+</Base>

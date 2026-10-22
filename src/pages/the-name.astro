@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Img from '../components/Img.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'The Name', href: '/the-name' }];
+---
+<Base title="The Name — Thaba ya Metsi, Sepedi for water mountain" description="What Thaba ya Metsi means, how to say it, and why the reserve kept it." crumbs={crumbs} og="spring-over-rocks">
+  <section class="page-head" style="border:0">
+    <div class="wrap stack">
+      <Crumbs items={crumbs} />
+      <span class="eyebrow" style="margin-top:2.6rem">The Name</span>
+      <!-- 1. The word -->
+      <h1 class="annot" lang="nso" style="margin-top:2rem">
+        <span class="w"><span>Thaba</span><span lang="en">mountain</span></span>
+        <span class="w small-w"><span>ya</span><span lang="en">of</span></span>
+        <span class="w"><span>Metsi</span><span lang="en">water</span></span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- 2. Meaning -->
+  <section class="band stone">
+    <div class="wrap split">
+      <figure class="frame ratio-45"><Img name="spring-over-rocks" alt="Spring water running over mossy rocks" sizes="(min-width: 900px) 50vw, 100vw" /></figure>
+      <div class="stack">
+        <span class="eyebrow">Meaning</span>
+        <h2>The mountain from which the water comes</h2>
+        <p>The name is Sepedi, the language of this part of Limpopo, and it describes the place exactly: the mountain from which the water comes. It was the name before it was a farm, and the reserve has kept it. It is written Thaba Ya Metsi in the reserve’s name and <span lang="nso">Thaba ya Metsi</span> when the words are spoken.</p>
+        <p>How the water moves through the reserve is on <a href="/the-reserve">the reserve page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Pronunciation -->
+  <section class="band">
+    <div class="wrap split wide-text">
+      <div class="stack"><span class="eyebrow">Pronunciation</span><h2>How to say it</h2></div>
+      <div class="stack">
+        <p class="lede">Said: <strong style="font-weight:500;letter-spacing:.04em">TAH-bah yah MET-see</strong>.</p>
+        <p><span class="listen" aria-disabled="true"><span class="dot" aria-hidden="true">▶</span> Listen <span class="tbc">recording to come</span></span></p>
+        <p class="small">Transcript: <span lang="nso">Thaba ya Metsi</span>, said by a first-language Sepedi speaker. <span class="tbc">record before launch</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The three names -->
+  <section class="band stone">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">The three names</span><h2>Three names, one place.</h2></div>
+      <div class="three">
+        <div><h3>Thaba Ya Metsi</h3><p>The land. Its name is Sepedi.</p></div>
+        <div><h3>The Maravi</h3><p>The house on the land. Its name is its own story, told on its own site.</p><a class="link" href={SITE.maravi} rel="noopener" data-track="maravi-name">The Maravi <span class="arrow" aria-hidden="true">→</span></a></div>
+        <div><h3>Talangi</h3><p>The wine poured at the house. Its name is Xitsonga.</p><a class="link" href={SITE.talangi} rel="noopener" data-track="talangi-name">Talangi Private Cellar <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+      <p class="lede measure" style="max-width:40rem">They are not the same thing and the reserve does not pretend they are.</p>
+    </div>
+  </section>
+  <StayFoot />
+</Base>

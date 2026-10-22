@@ -1,0 +1,25 @@
+---
+import data from '../data/images.json';
+interface Props { name: string; alt: string; sizes?: string; eager?: boolean; class?: string; pos?: string; title?: string }
+const { name, alt, sizes = '100vw', eager = false, class: cls, pos, title } = Astro.props;
+const m = (data as any)[name];
+if (!m) throw new Error('Missing image ' + name);
+const srcset = m.sizes.map((w: number) => `/img/${name}-${w}.webp ${w}w`).join(', ');
+const mid = m.sizes[Math.min(1, m.sizes.length - 1)];
+const largest = m.sizes[m.sizes.length - 1];
+const h = Math.round((m.h / m.w) * largest);
+---
+<img
+  src={`/img/${name}-${mid}.webp`}
+  srcset={srcset}
+  sizes={sizes}
+  width={largest}
+  height={h}
+  alt={alt}
+  title={title}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+  decoding={eager ? 'sync' : 'async'}
+  class={cls}
+  style={pos ? `object-position:${pos}` : undefined}
+/>

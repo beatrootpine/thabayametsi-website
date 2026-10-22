@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import Map from '../components/Map.astro';
+import StayFoot from '../components/StayFoot.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Visit & Contact', href: '/visit' }];
+const g = `https://www.google.com/maps/search/?api=1&query=${SITE.lat},${SITE.lng}`;
+const a = `https://maps.apple.com/?ll=${SITE.lat},${SITE.lng}&q=Thaba%20Ya%20Metsi`;
+---
+<Base title="Visit and Contact — Thaba Ya Metsi" description="Directions from Johannesburg and Polokwane, the map pin, the helipad, and who may visit the reserve." crumbs={crumbs}>
+  <PageHead title="Visit &amp; Contact" eyebrow="Thaba Ya Metsi Private Game Reserve" crumbs={crumbs}>
+    The reserve is not open to the public. Guests of The Maravi have the run of it; partners, researchers and press visit by arrangement through the <a href="/partners">Enquiries page</a>.
+  </PageHead>
+
+  <!-- 2. Directions -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Directions</span><h2>By road</h2></div>
+      <div class="directions">
+        <div>
+          <h3>From Johannesburg <span class="muted" style="font-family:var(--sans);font-size:.9rem">about 2½ hours</span></h3>
+          <ol>
+            <li>N1 north past Bela-Bela and Modimolle.</li>
+            <li>Take the Mookgopong exit.</li>
+            <li>Follow the R101 north towards Mokopane.</li>
+            <li>Turn at <span class="tbc">signposted turn: confirm</span> onto Old R101 Road.</li>
+            <li>The reserve gate is at 101 Old R101 Road.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>From Polokwane <span class="muted" style="font-family:var(--sans);font-size:.9rem">about 1 hour</span></h3>
+          <ol>
+            <li>N1 south to Mokopane.</li>
+            <li>R101 south.</li>
+            <li>Turn as above onto Old R101 Road; the gate is at 101 Old R101 Road.</li>
+          </ol>
+        </div>
+      </div>
+      <p>The last <span class="tbc">[x] km</span> are gravel and suitable for any car in dry weather; after heavy rain a higher-clearance vehicle is better. Arrive before dark.</p>
+      <div class="foot-cta" style="border-top:1px solid var(--line);padding-top:1.6rem">
+        <p><strong style="color:var(--ink)">Map pin:</strong> {SITE.gps}</p>
+        <div class="links">
+          <a class="link" href={g} rel="noopener">Open in Google Maps <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="link" href={a} rel="noopener">Open in Apple Maps <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <Map />
+    </div>
+  </section>
+
+  <!-- 3. By air -->
+  <section class="band stone">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack"><span class="eyebrow">By air</span><h2>Helipad and airfields</h2></div>
+      <div class="stack">
+        <p>A helipad on the reserve at <span class="tbc">coordinates: confirm</span>; flying time about 55 minutes from Grand Central or Lanseria. Nearest airfields: Mokopane, Polokwane International. Charter is arranged through The Maravi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Contact -->
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="stack"><span class="eyebrow">Contact</span><h2>Two addresses, kept apart</h2></div>
+      <div class="contact-cols">
+        <div class="contact-card">
+          <h3>Thaba Ya Metsi Private Game Reserve</h3>
+          <p class="small">The reserve’s office: partners, research, press, neighbours.</p>
+          <dl>
+            <dt>Office</dt><dd>{SITE.officePhone || <span class="tbc">phone to confirm</span>}</dd>
+            <dt>Email</dt><dd>{SITE.officeEmail || <span class="tbc">email to confirm</span>}</dd>
+            <dt>Gate</dt><dd>101 Old R101 Road, Mookgopong, 0600</dd>
+            <dt>Postal</dt><dd>{SITE.postalAddress || <span class="tbc">postal address to confirm</span>}</dd>
+          </dl>
+        </div>
+        <div class="contact-card">
+          <h3>The Maravi</h3>
+          <p class="small">Stays and bookings at the reserve’s farm hotel.</p>
+          <dl>
+            <dt>Phone</dt><dd>{SITE.maraviPhone || <span class="tbc">phone to confirm</span>}</dd>
+            <dt>Email</dt><dd>{SITE.maraviEmail || <span class="tbc">email to confirm</span>}</dd>
+          </dl>
+          <a class="link" href={SITE.maravi} rel="noopener" data-track="stay-visit" style="justify-self:start;margin-top:.6rem">The Maravi’s website <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="split wide-text" style="align-items:start;margin-top:clamp(2rem,5vw,4rem)">
+        <div class="stack"><h3>Write to the office</h3><p class="small">For stays, use The Maravi’s site. This form reaches the reserve’s office.</p></div>
+        <EnquiryForm id="visit-form" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Access and safety -->
+  <section class="band stone">
+    <div class="wrap split wide-text" style="align-items:start">
+      <div class="stack"><span class="eyebrow">Access and safety</span><h2>On the reserve</h2></div>
+      <ul class="rule-list">
+        <li>The gate is closed at night and opens for expected guests.</li>
+        <li>The reserve is unfenced to leopard and brown hyena and walking after dark is not permitted.</li>
+        <li>No drones without written permission.</li>
+        <li>No firearms.</li>
+        <li>No pets.</li>
+        <li>The rock pool and springs are unfenced and children are in the care of their parents.</li>
+      </ul>
+    </div>
+  </section>
+  <StayFoot />
+</Base>

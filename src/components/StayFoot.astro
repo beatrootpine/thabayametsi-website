@@ -1,0 +1,17 @@
+---
+import { SITE } from '../data/site';
+interface Props { second?: { href: string; label: string }; heading?: string }
+const { second, heading = 'The reserve holds one house, The Maravi.' } = Astro.props;
+---
+<section class="band tight dark">
+  <div class="wrap foot-cta">
+    <div class="stack">
+      <span class="eyebrow">Stay</span>
+      <h2>{heading}</h2>
+    </div>
+    <div class="links">
+      <a class="btn light" href={SITE.maravi} rel="noopener" data-track="stay-foot">Stay at The Maravi <span class="arrow" aria-hidden="true">→</span></a>
+      {second && <a class="link" href={second.href} style="color:var(--on-dark)">{second.label} <span class="arrow" aria-hidden="true">→</span></a>}
+    </div>
+  </div>
+</section>
