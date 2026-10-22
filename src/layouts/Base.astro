@@ -49,7 +49,8 @@ const year = new Date().getFullYear();
   <meta property="og:locale" content="en_ZA" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#1c2928" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   {pre && <link rel="preload" as="image" imagesrcset={pre.sizes.map((w: number) => `/img/${preload}-${w}.webp ${w}w`).join(', ')} imagesizes="100vw" fetchpriority="high" />}
   <script type="application/ld+json" set:html={JSON.stringify(graph)} />
@@ -59,8 +60,14 @@ const year = new Date().getFullYear();
   <header class={`site-header${heroPage ? '' : ' solid'}`} id="site-header" data-hero={heroPage ? '1' : '0'}>
     <div class="wrap bar">
       <a class="wordmark" href="/" aria-label={`${SITE.name}, home`}>
-        <span class="wm-name">Thaba Ya Metsi</span>
-        <span class="wm-sub">Private Game Reserve</span>
+        <span class="wm-emblem" aria-hidden="true">
+          <img class="em-light" src="/brand/emblem-white.png" width="108" height="200" alt="" />
+          <img class="em-dark" src="/brand/emblem-bronze.png" width="108" height="200" alt="" />
+        </span>
+        <span class="wm-text">
+          <span class="wm-name">Thaba Ya Metsi</span>
+          <span class="wm-sub">Water Mountain</span>
+        </span>
       </a>
       <nav class="primary-nav" aria-label="Primary">
         <ul>
@@ -93,8 +100,9 @@ const year = new Date().getFullYear();
     <div class="wrap">
       <div class="footer-top">
         <div>
-          <h2>Thaba Ya Metsi<br />Private Game Reserve</h2>
-          <p style="margin-top:1.2rem">Waterberg, Limpopo, South Africa</p>
+          <img class="footer-logo" src="/brand/logo-reverse.png" width="520" height="677" alt="Thaba Ya Metsi, water mountain" loading="lazy" />
+          <p style="margin-top:1.6rem;color:var(--on-dark)">Thaba Ya Metsi Private Game Reserve</p>
+          <p style="margin-top:.3rem">Waterberg, Limpopo, South Africa</p>
           <p style="margin-top:.3rem">GPS {SITE.gps}</p>
         </div>
         <div class="footer-cols">
