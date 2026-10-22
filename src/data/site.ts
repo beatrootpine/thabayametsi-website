@@ -20,7 +20,7 @@ export const SITE = {
   postalAddress: '',
   maraviPhone: '',
   maraviEmail: '',
-  instagram: '',
+  instagram: 'https://www.instagram.com/thabayametsi/',
 };
 
 export const NAV = [
